@@ -27,8 +27,12 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <!-- Settings & Language Dropdowns -->
+            <div class="hidden sm:flex sm:items-center sm:gap-3 sm:ms-6">
+                <!-- Language Switcher Dropdown -->
+                <x-language-switcher />
+
+                <!-- Settings Dropdown -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -112,6 +116,22 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+            </div>
+        </div>
+
+        <!-- Responsive Language Switcher -->
+        <div class="border-t border-[#dfe4db] px-4 py-3">
+            <div class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#829087]">{{ __('Language') }}
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('locale.switch', 'en') }}"
+                    class="rounded-lg px-3 py-1.5 text-xs font-semibold {{ app()->getLocale() === 'en' ? 'bg-[#30483e] text-white' : 'bg-white border border-[#cbd9c8] text-[#30483e]' }}">
+                    English
+                </a>
+                <a href="{{ route('locale.switch', 'ku') }}"
+                    class="rounded-lg px-3 py-1.5 text-xs font-semibold {{ app()->getLocale() === 'ku' ? 'bg-[#30483e] text-white' : 'bg-white border border-[#cbd9c8] text-[#30483e]' }}">
+                    کوردی
+                </a>
             </div>
         </div>
     </div>

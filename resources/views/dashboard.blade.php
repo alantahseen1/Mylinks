@@ -64,12 +64,12 @@
                         <div>
                             <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[#9a6b4f]">{{ __('Your
                                 links') }}</p>
-                            <h3 class="mt-1 font-serif text-2xl font-bold text-[#25312d]">{{ __('What is getting
-                                attention') }}</h3>
+                            <h3 class="mt-1 font-serif text-2xl font-bold text-[#25312d]">
+                                {{ __('What is getting attention') }}</h3>
                         </div>
                         <a href="{{ route('links.index') }}"
                             class="text-sm font-semibold text-[#30483e] hover:text-[#9a6b4f]">{{ __('Manage') }} <span
-                                aria-hidden="true">→</span></a>
+                                aria-hidden="true" class="inline-block rtl:rotate-180">→</span></a>
                     </div>
                     <div class="mt-6 flex flex-col gap-3">
                         @forelse ($links->sortByDesc('clicks')->take(3) as $link)
@@ -83,7 +83,7 @@
                                     $link->url }}</p>
                             </div>
                             <span class="shrink-0 text-sm font-semibold text-[#9a6b4f]">{{ number_format($link->clicks)
-                                }} {{ Str::plural('click', $link->clicks) }}</span>
+                                }} {{ __('clicks') }}</span>
                         </div>
                         @empty
                         <p class="py-6 text-sm text-[#6b7770]">{{ __('Add a link to start seeing performance here.') }}
@@ -96,8 +96,11 @@
                     <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[#9a6b4f]">{{ __('Next move') }}
                     </p>
                     <h3 class="mt-2 font-serif text-2xl font-bold text-[#25312d]">{{ __('Keep your page fresh.') }}</h3>
-                    <p class="mt-3 text-sm leading-6 text-[#53635b]">{{ __('Add new destinations, reorder your best
-                        links, and share your page wherever your audience already follows you.') }}</p>
+                    <p class="mt-3 text-sm leading-6 text-[#53635b]">
+
+                        {{ __('Add new destinations, reorder your best links, and share your page wherever your audience
+                        already follows you.') }}
+                    </p>
                     <a href="{{ route('links.create') }}"
                         class="mt-6 inline-flex rounded-xl bg-[#30483e] px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[#253a32]">{{
                         __('Add another link') }}</a>

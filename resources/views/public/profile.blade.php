@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ku' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -28,17 +28,20 @@
             <div
                 class="mb-10 flex w-full items-center justify-between text-xs font-semibold uppercase tracking-[0.22em] text-[#6b7770]">
                 <span>{{ config('app.name', 'MyLinks') }}</span>
-                <span>{{ $links->count() }} {{ Str::plural('link', $links->count()) }}</span>
+                <div class="flex items-center gap-3">
+                    <span>{{ $links->count() }} {{ Str::plural('link', $links->count()) }}</span>
+                    <x-language-switcher />
+                </div>
             </div>
 
             @guest
             <a href="{{ route('register') }}"
-                class="mb-10 flex w-full items-center justify-between gap-4 rounded-2xl border border-[#cbd9c8] bg-[#e5eee1] px-5 py-4 text-left transition hover:-translate-y-0.5 hover:border-[#9cad96] hover:bg-[#dce9d8] focus:outline-none focus:ring-2 focus:ring-[#30483e] focus:ring-offset-4 focus:ring-offset-[#f6f3ed]">
+                class="mb-10 flex w-full items-center justify-between gap-4 rounded-2xl border border-[#cbd9c8] bg-[#e5eee1] px-5 py-4 text-start transition hover:-translate-y-0.5 hover:border-[#9cad96] hover:bg-[#dce9d8] focus:outline-none focus:ring-2 focus:ring-[#30483e] focus:ring-offset-4 focus:ring-offset-[#f6f3ed]">
                 <span>
                     <span class="block text-sm font-semibold text-[#30483e]">{{ __('Want a page like this?') }}</span>
                     <span class="mt-1 block text-xs text-[#53635b]">{{ __('Create your own links in minutes.') }}</span>
                 </span>
-                <span aria-hidden="true" class="shrink-0 text-xl text-[#9a6b4f]">→</span>
+                <span aria-hidden="true" class="shrink-0 text-xl text-[#9a6b4f] rtl:rotate-180">→</span>
             </a>
             @endguest
 
@@ -55,7 +58,8 @@
                 </div>
                 @endif
 
-                <p class="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6b4f]">Welcome to my corner
+                <p class="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6b4f]">{{ __('Welcome to my
+                    corner') }}
                 </p>
                 <h1 class="font-serif text-4xl font-bold leading-tight text-[#25312d] sm:text-5xl">{{ $user->name }}
                 </h1>
@@ -78,13 +82,13 @@
                         <span aria-hidden="true">↗</span>
                         @endif
                     </span>
-                    <span class="min-w-0 flex-1 text-left">
+                    <span class="min-w-0 flex-1 text-start">
                         <span class="block truncate font-semibold text-[#25312d]">{{ $link->title }}</span>
                         <span class="mt-1 block truncate text-xs text-[#829087]">{{ parse_url($link->url, PHP_URL_HOST)
                             ?: $link->url }}</span>
                     </span>
                     <span aria-hidden="true"
-                        class="text-xl text-[#9a6b4f] transition-transform group-hover:translate-x-1">→</span>
+                        class="text-xl text-[#9a6b4f] transition-transform ltr:group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">→</span>
                 </a>
                 @empty
                 <div class="rounded-2xl border border-dashed border-[#cbd5ca] bg-white/50 px-6 py-10 text-center">

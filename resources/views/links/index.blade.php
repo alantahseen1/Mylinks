@@ -29,8 +29,7 @@
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#9a6b4f]">{{ __('Share your page')
                         }}</p>
-                    <p class="mt-1 text-sm text-[#53635b]">{{ __('Add this link to your social media bio so people can
-                        find everything you share.') }}</p>
+                    <p class="mt-1 text-sm text-[#53635b]">{{ __('Add this link to your social media bio so people can find everything you share.') }}</p>
                 </div>
                 <div class="mt-5 flex flex-col gap-3 sm:flex-row">
                     <input type="text" readonly value="{{ $publicUrl }}" aria-label="{{ __('Your public page URL') }}"
@@ -94,8 +93,7 @@
                         </div>
                         <p class="truncate text-sm text-[#829087]">{{ parse_url($link->url, PHP_URL_HOST) ?: $link->url
                             }}</p>
-                        <p class="mt-1 text-xs text-[#9a6b4f]">{{ number_format($link->clicks) }} {{
-                            Str::plural('click', $link->clicks) }}</p>
+                        <p class="mt-1 text-xs text-[#9a6b4f]">{{ number_format($link->clicks) }} {{ __('clicks') }}</p>
                     </div>
 
                     <!-- Actions -->

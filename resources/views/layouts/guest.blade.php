@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ku' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -23,6 +23,10 @@
         </div>
         <div
             class="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full border-[28px] border-[#ead7c4] opacity-70">
+        </div>
+
+        <div class="absolute top-5 ltr:right-5 rtl:left-5 z-20">
+            <x-language-switcher />
         </div>
 
         <div class="relative w-full sm:max-w-lg">

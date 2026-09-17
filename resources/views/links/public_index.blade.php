@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ku' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -25,8 +25,11 @@
 
         <main class="relative mx-auto flex w-full max-w-2xl flex-col items-center">
             <header class="mb-12 w-full max-w-xl">
-                <p class="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6b4f]">{{ config('app.name',
-                    'MyLinks') }} / {{ __('Explore') }}</p>
+                <div
+                    class="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6b4f]">
+                    <span>{{ config('app.name', 'MyLinks') }} / {{ __('Explore') }}</span>
+                    <x-language-switcher />
+                </div>
                 <div class="flex items-end justify-between gap-6">
                     <h1 class="font-serif text-4xl font-bold leading-tight text-[#25312d] sm:text-5xl">{{ __('Discover
                         good links.') }}</h1>
@@ -73,7 +76,7 @@
                                 <span aria-hidden="true">↗</span>
                                 @endif
                             </span>
-                            <span class="min-w-0 flex-1 text-left">
+                            <span class="min-w-0 flex-1 text-start">
                                 <span class="block truncate font-semibold text-[#25312d]">{{ $link->title }}</span>
                                 <span class="mt-1 block truncate text-xs text-[#829087]">{{ parse_url($link->url,
                                     PHP_URL_HOST)
@@ -81,7 +84,7 @@
                             </span>
 
                             <span aria-hidden="true"
-                                class="text-xl text-[#9a6b4f] transition-transform group-hover:translate-x-1">→</span>
+                                class="text-xl text-[#9a6b4f] transition-transform ltr:group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1">→</span>
                         </a>
                         @endforeach
                     </div>

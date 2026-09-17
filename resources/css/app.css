@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Rudaw';
+    src: url('/fonts/Rudaw.ttf') format('truetype');
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+    font-family: 'Rudaw', sans-serif;
+}

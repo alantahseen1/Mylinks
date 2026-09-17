@@ -35,6 +35,10 @@ class ProfileUpdateRequest extends FormRequest
         'reset-password',
         'confirm-password',
         'email',
+        'locale',
+        'language',
+        'links',
+        'go',
     ];
 
     /**

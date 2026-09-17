@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/links', [LinkController::class, 'publicIndex'])->name('links.public.index');
 Route::get('/go/{link}', [LinkController::class, 'click'])->name('links.click');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::get('/locale/{locale}', LocaleController::class)->name('locale.switch');
 
 // Public profile — registered last so it doesn't shadow app routes
 Route::get('/{user:username}', [PublicProfileController::class, 'show'])->name('profile.public');
