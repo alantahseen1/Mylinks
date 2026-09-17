@@ -9,9 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [LinkController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/dashboard/links/{link}/toggle', [LinkController::class, 'toggleActive'])->name('links.toggle');
     Route::post('/dashboard/links/reorder', [LinkController::class, 'reorder'])->name('links.reorder');
 });
+
+Route::get('/links', [LinkController::class, 'publicIndex'])->name('links.public.index');
+Route::get('/go/{link}', [LinkController::class, 'click'])->name('links.click');
 
 require __DIR__.'/auth.php';
 

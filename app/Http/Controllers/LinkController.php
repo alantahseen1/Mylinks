@@ -13,6 +13,22 @@ use Illuminate\View\View;
 class LinkController extends Controller
 {
     /**
+     * Display the authenticated user's link overview.
+     */
+    public function dashboard(Request $request): View
+    {
+        $links = $request->user()->links()->orderBy('position')->get();
+
+        return view('dashboard', [
+            'user' => $request->user(),
+            'links' => $links,
+            'profileViews' => $request->user()->profile_views,
+            'totalClicks' => $links->sum('clicks'),
+            'topLink' => $links->sortByDesc('clicks')->first(),
+        ]);
+    }
+
+    /**
      * Display the authenticated user's links.
      */
     public function index(Request $request): View
@@ -22,7 +38,10 @@ class LinkController extends Controller
             ->orderBy('position')
             ->get();
 
-        return view('links.index', ['links' => $links]);
+        return view('links.index', [
+            'links' => $links,
+            'publicUrl' => route('profile.public', $request->user()->username),
+        ]);
     }
 
     /**
@@ -118,5 +137,29 @@ class LinkController extends Controller
         }
 
         return redirect()->route('links.index')->with('status', 'links-reordered');
+    }
+
+    public function publicIndex(): View
+    {
+        $links = Link::with('user')
+            ->where('is_active', true)
+            ->orderBy('position')
+            ->get();
+
+        return view('links.public_index', ['links' => $links]);
+    }
+
+    /**
+     * Record a public link click and redirect to its destination.
+     */
+    public function click(Request $request, Link $link): RedirectResponse
+    {
+        abort_unless($link->is_active, 404);
+
+        if ($request->user()?->id !== $link->user_id) {
+            $link->increment('clicks');
+        }
+
+        return redirect()->away($link->url);
     }
 }

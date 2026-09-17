@@ -19,6 +19,7 @@ class Link extends Model
     {
         return [
             'is_active' => 'boolean',
+            'clicks' => 'integer',
         ];
     }
 
